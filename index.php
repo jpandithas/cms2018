@@ -25,6 +25,10 @@ else
     echo "Not Connected";
 }
 
+echo "<br/>";
+
+echo $db->GetModuleFromDB($url);
+
 
 ?>
 

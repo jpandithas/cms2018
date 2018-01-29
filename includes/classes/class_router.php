@@ -14,7 +14,13 @@ class Router
         if (is_readable($file_path))
         {
             require_once($file_path);
+            if (is_callable($mod_name,True))
+            {
+                call_user_func($mod_name);
+                return True;
+            }
         }
+        return False;
     }
 }
 

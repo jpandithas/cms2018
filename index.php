@@ -4,31 +4,9 @@
  * Time: 7:04 PM
  */
 
-include('settings/settings.php');
-include('includes/classes/class_url.php');
-include('includes/classes/class_db.php');
+include ("includes/bootstrap.php");
 
-var_dump($_GET);
-
-$url = new URL();
-
-var_dump($url->GetUrlComponentArray());
-
-$db = new DB();
-
-if ($db->testDB())
-{
-    echo "DB Success";
-}
-else
-{
-    echo "Not Connected";
-}
-
-echo "<br/>";
-
-echo $db->GetModuleFromDB($url);
-
+boot(True);
 
 ?>
 

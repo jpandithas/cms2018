@@ -6,7 +6,7 @@
 
 include ("includes/bootstrap.php");
 
-boot(True);
+boot();
 
 ?>
 

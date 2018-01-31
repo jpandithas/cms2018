@@ -1,0 +1,48 @@
+* {
+    box-sizing: border-box;
+}
+
+#container-outer {
+    width: 100%;
+    background-color: aqua;
+    height: 100%;
+    margin: 0px;
+}
+
+#header{
+    width: 100%;
+    background-color: lightgray;
+    overflow: hidden;
+}
+
+.flex {
+    display: flex;
+}
+
+#container-inner {
+    width: 100%;
+    overflow: auto;
+}
+
+#sidebar {
+    width: 20%;
+    background-color: aquamarine;
+    float: left;
+    display: block;
+    padding: 9px;
+}
+
+#content {
+    width: 80%;
+    background-color: azure;
+    float: right;
+    display: block;
+    padding: 9px;
+}
+
+#footer {
+    width: 100%;
+    background-color: lightgoldenrodyellow;
+    clear: both;
+    overflow: hidden;
+}

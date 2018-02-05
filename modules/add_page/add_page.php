@@ -6,7 +6,8 @@
 
 function add_page()
 {
-    echo "YOU have Called ADD PAGE!";
+
+    t_content("This is the Add page module");
 }
 
 ?>

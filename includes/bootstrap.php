@@ -16,6 +16,7 @@ function boot($debug=False)
 
     include("themes/default/theme.html");
 
+
 }
 
 function LoadFile($path,$debug=True)

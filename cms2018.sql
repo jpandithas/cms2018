@@ -2,10 +2,10 @@
 -- version 4.1.14
 -- http://www.phpmyadmin.net
 --
--- Host: 127.0.0.1
--- Generation Time: Jan 22, 2018 at 08:03 PM
--- Server version: 5.6.17
--- PHP Version: 5.5.12
+-- Φιλοξενητής: 127.0.0.1
+-- Χρόνος δημιουργίας: 06 Φεβ 2018 στις 10:23:49
+-- Έκδοση διακομιστή: 5.6.17
+-- Έκδοση PHP: 5.5.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,13 +17,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `cms2018`
+-- Βάση δεδομένων: `cms2018`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `routes`
+-- Δομή πίνακα για τον πίνακα `routes`
 --
 
 CREATE TABLE IF NOT EXISTS `routes` (
@@ -36,7 +36,14 @@ CREATE TABLE IF NOT EXISTS `routes` (
   `mod_desc` mediumtext NOT NULL,
   `status` tinyint(1) NOT NULL,
   PRIMARY KEY (`routeid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+
+--
+-- Άδειασμα δεδομένων του πίνακα `routes`
+--
+
+INSERT INTO `routes` (`routeid`, `action`, `type`, `id`, `mod_name`, `mod_real_name`, `mod_desc`, `status`) VALUES
+(1, 'add', 'page', 0, 'add_page', 'Add Page', 'This is the Add page mod info', 1);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

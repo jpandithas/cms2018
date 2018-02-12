@@ -6,9 +6,16 @@
 
 
 
-function t_content($content)
+function t_content($content="")
 {
-   Theme::$content = $content;
+   if (isset($GLOBALS['content']))
+   {
+       $GLOBALS['content'] .= $content;
+   }
+    else
+    {
+        $GLOBALS['content'] = $content;
+    }
 }
 
 function print_header()
@@ -18,7 +25,14 @@ function print_header()
 
 function print_content()
 {
-   print(Theme::$content);
+    if (isset($GLOBALS['content']))
+    {
+        print($GLOBALS['content']);
+    }
+    else
+    {
+        print("No data to display");
+    }
 }
 
 function print_sidebar()

@@ -1,0 +1,52 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: auto;
+}
+
+#container-outer {
+    width: 100%;
+    background-color: #ffe300;
+    height: 100%;
+    margin: 0px;
+}
+
+#header{
+    width: 100%;
+    background-color: #f7ccfa;
+    overflow: hidden;
+}
+
+.flex {
+    display: flex;
+}
+
+#container-inner {
+    width: 100%;
+    overflow: auto;
+}
+
+#sidebar {
+    width: 20%;
+    background-color: #afc8ff;
+    float: left;
+    display: block;
+    padding: 9px;
+}
+
+#content {
+    width: 80%;
+    background-color: #ffc82e;
+    float: right;
+    display: block;
+    padding: 9px;
+}
+
+#footer {
+    width: 100%;
+    background-color: #00d1ff;
+    clear: both;
+    overflow: hidden;
+}

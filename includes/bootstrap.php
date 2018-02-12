@@ -14,7 +14,7 @@ function boot($debug=False)
 
     Router::RunModule($url);
 
-    include("themes/default/theme.html");
+    Theme::GetActiveTheme();
 
 
 }

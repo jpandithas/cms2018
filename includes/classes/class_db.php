@@ -72,6 +72,21 @@ class DB
         return False;
     }
 
+    public function GetActiveTheme()
+    {
+        $dbo = $this->dbo;
+
+        $stmt = $dbo->prepare("SELECT theme_machine_name FROM themes WHERE status = 1 LIMIT 1");
+        $result = $stmt->execute(array());
+
+        if ($result)
+        {
+            $theme_machine_name = $stmt->fetch();
+            return $theme_machine_name['theme_machine_name'];
+        }
+        return False;
+    }
+
 }
 
 ?>

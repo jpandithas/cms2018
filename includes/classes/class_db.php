@@ -87,6 +87,25 @@ class DB
         return False;
     }
 
+    public function DBAuthUser($username,$password)
+    {
+        $dbo = $this->dbo;
+
+        if (empty($username) or empty($password)) return False;
+        $usr = strip_tags($username);
+        $pass = strip_tags($password);
+
+        $sql  = "SELECT `uid` from `users` WHERE `username`= ? AND `password` = ? ";
+        $stmt = $dbo->prepare($sql);
+        $result = $stmt->execute(array($usr,$pass));
+        if ($result)
+        {
+            $uid = $stmt->fetch();
+            return $uid['uid'];
+        }
+        return False;
+    }
+
 }
 
 ?>

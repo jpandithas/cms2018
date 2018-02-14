@@ -18,12 +18,11 @@ class Theme
             if (is_readable($theme_path."/theme.html"))
             {
                 include_once($theme_path."/theme.html");
+                return True;
             }
         }
-        else
-        {
+
             include("themes/default/theme.html");
-        }
     }
 
 }

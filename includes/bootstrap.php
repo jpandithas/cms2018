@@ -14,9 +14,9 @@ function boot($debug=False)
 
     Router::RunModule($url);
 
+    ob_start();
     Theme::GetActiveTheme();
-
-
+    ob_end_flush();  // NO CODE BELOW THIS LINE
 }
 
 function LoadFile($path,$debug=True)

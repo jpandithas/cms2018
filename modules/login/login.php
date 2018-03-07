@@ -6,11 +6,43 @@
 
 function login()
 {
-    var_dump($_POST);
+    if (Security::IsLoggedIn())
+    {
+        t_content("User already Logged in!");
+        return False;
+    }
 
     if (isset($_POST['submit']) and ($_POST['submit'] == 'Login'))
     {
-        t_content("Logged");
+
+        if (!empty($_POST['username']) and !empty($_POST['password']))
+        {
+            $username = strip_tags($_POST['username']);
+            $password = strip_tags($_POST['password']);
+
+            $db  = new DB();
+
+            $uid  = $db->DBAuthUser($username, $password);
+
+            if ($uid)
+            {
+                $user  = new User($uid);
+                $_SESSION['uid'] = $uid;
+                $_SESSION['username'] = $user->GetUsername();
+                $_SESSION['userlevel'] = $user->GetUserlevel();
+                $url  = new URL();
+                $url->Redirect("home");
+            }
+            else
+            {
+                $error_msg = "Login Failed!";
+            }
+        }
+        else $error_msg = "Username or Password Empty!";
+    }
+    if (isset($error_msg))
+    {
+        t_content($error_msg);
     }
     t_content(login_form());
 }
@@ -24,6 +56,8 @@ function login_form()
     $form .= "<tr><td colspan='2'><input type='submit' name='submit' value='Login'></td></tr>";
     $form .= "</table>";
     $form .= "</form>";
+    return $form;
 }
+
 
 ?>

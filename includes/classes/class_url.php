@@ -44,6 +44,19 @@ class URL
         if(!empty($this->id)) {$url_array['id'] = $this->id;}
         return $url_array;
      }
+
+    public function Redirect($path="home")
+    {
+        $base_path = CMS_BASE_URI;
+        if (strtolower($path) == "home")
+        {
+            header("Location:".$base_path);
+        }
+        else
+        {
+            header("Location:".$base_path."?q=".$path);
+        }
+    }
 }
 
 ?>

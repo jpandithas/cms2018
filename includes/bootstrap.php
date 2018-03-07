@@ -14,6 +14,11 @@ function boot($debug=False)
 
     Router::RunModule($url);
 
+    if (Security::IsLoggedIn())
+    {
+        echo "User: ".$_SESSION['username']." is online";
+    }
+
     ob_start();
     Theme::GetActiveTheme();
     ob_end_flush();  // NO CODE BELOW THIS LINE

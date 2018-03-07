@@ -6,7 +6,9 @@
 
 function logout()
 {
-
+    session_destroy();
+    $url = new URL();
+    $url->Redirect("home");
 }
 
 ?>

@@ -63,6 +63,7 @@ class DB
         $stmt = $dbo->prepare($sql);
         $result = $stmt->execute($params);
 
+
         if ($result)
         {
             $mod_name  = $stmt->fetch();
@@ -102,6 +103,23 @@ class DB
         {
             $uid = $stmt->fetch();
             return $uid['uid'];
+        }
+        return False;
+    }
+
+    public function GetUserDataFromID($uid)
+    {
+        $dbo  = $this->dbo;
+
+        $sql = "SELECT username,userlevel FROM users WHERE uid = ? LIMIT 1";
+
+        $stmt = $dbo->prepare($sql);
+        $result  = $stmt->execute(array($uid));
+
+        if ($result)
+        {
+            $user = $stmt->fetch();
+            return array("username" => $user['username'],"userlevel" => $user['userlevel']);
         }
         return False;
     }

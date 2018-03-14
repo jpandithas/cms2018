@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 07, 2018 at 04:25 PM
+-- Generation Time: Mar 14, 2018 at 07:26 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -19,6 +19,22 @@ SET time_zone = "+00:00";
 --
 -- Database: `cms2018`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `page`
+--
+
+CREATE TABLE IF NOT EXISTS `page` (
+  `pageid` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) NOT NULL,
+  `content` text NOT NULL,
+  `alias` varchar(255) NOT NULL,
+  `timeadd` timestamp NOT NULL,
+  `timeedit` timestamp NOT NULL,
+  PRIMARY KEY (`pageid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -46,7 +62,7 @@ INSERT INTO `routes` (`routeid`, `action`, `type`, `id`, `mod_name`, `mod_real_n
 (1, 'add', 'page', 0, 'add_page', 'Add Page', 'This is the add page module', 1),
 (2, 'login', NULL, 0, 'login', 'Login', 'This is the login module ', 1),
 (3, 'select', 'theme', 0, 'select_theme', 'Select a theme', 'This is the theme selection mod', 1),
-(4, 'logout', NULL, 0, 'logout', 'Logout module', 'This is the logout module. ', 1);
+(4, 'logout', NULL, 0, 'logout', 'Logout', 'This is the logout module. ', 1);
 
 -- --------------------------------------------------------
 
@@ -80,7 +96,7 @@ INSERT INTO `themes` (`tid`, `theme_machine_name`, `theme_display_name`, `theme_
 CREATE TABLE IF NOT EXISTS `users` (
   `uid` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(30) DEFAULT NULL,
-  `password` varchar(30) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
   `userlevel` int(11) DEFAULT NULL,
   PRIMARY KEY (`uid`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
@@ -90,7 +106,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`uid`, `username`, `password`, `userlevel`) VALUES
-(1, 'admin', '1234', 1);
+(1, 'admin', '9cd2a2a4fc09b8d8792943ffb19f493c', 1);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

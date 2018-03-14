@@ -5,7 +5,7 @@
  */
 
 define("DB_USER","root");
-define("DB_PASSWORD","root1234");
+define("DB_PASSWORD","");
 define("DB_HOST","localhost");
 define("DB_NAME",'cms2018');
 define("CMS_BASE_URI",$_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF']);

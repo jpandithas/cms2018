@@ -19,6 +19,8 @@ function boot($debug=False)
         echo "User: ".$_SESSION['username']." is online";
     }
 
+    t_sidebar(Theme::RenderMainNavMenu());
+
     ob_start();
     Theme::GetActiveTheme();
     ob_end_flush();  // NO CODE BELOW THIS LINE

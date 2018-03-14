@@ -17,4 +17,11 @@ class Security
             return false;
         }
     }
+
+    public static function CMS_Hash($data)
+    {
+        if (empty($data)) return False; //one line statement does not need {}
+
+        return md5(HASH_SALT.md5($data));
+    }
 }

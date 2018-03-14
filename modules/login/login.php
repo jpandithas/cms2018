@@ -8,7 +8,7 @@ function login()
 {
     if (Security::IsLoggedIn())
     {
-        t_content("User already Logged in!");
+        t_content("User <b>'{$_SESSION['username']}'</b> already Logged in!");
         return False;
     }
 

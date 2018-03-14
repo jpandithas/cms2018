@@ -10,5 +10,6 @@ define("DB_HOST","localhost");
 define("DB_NAME",'cms2018');
 define("CMS_BASE_URI",$_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF']);
 define("BASE_PATH",getcwd());
+define("HASH_SALT",md5("cms"));
 
 ?>

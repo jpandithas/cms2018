@@ -25,4 +25,30 @@ class Theme
             include("themes/default/theme.html");
     }
 
+    public static function RenderMainNavMenu()
+    {
+        $db = new DB();
+        $items = $db->GetSidebarItems();
+
+        $html = "<ul id='main-nav' class='nav'>";
+
+        foreach ($items as $item)
+        {
+            if ((Security::IsLoggedIn()== True) and ($item['action']=='login')) continue;
+            if ((Security::IsLoggedIn()== False) and ($item['action']=='logout')) continue;
+
+            $html .= "<li class='nav-item'>";
+            $html.= "<a class='nav-link' href='".CMS_BASE_URI."?q=".$item['action'];
+            if ($item['type']!=null)
+            {
+                $html.="/".$item['type'];
+            }
+            $html.="'>".$item['mod_real_name']."</a>";
+        }
+
+        $html.="</ul>";
+
+        return $html;
+    }
+
 }

@@ -4,6 +4,7 @@
 
 body {
     margin: auto;
+    font-family: Arial, helvetica, sans-serif;
 }
 
 #container-outer {
@@ -36,6 +37,37 @@ body {
     padding: 9px;
 }
 
+tr:nth-child(odd)
+{
+    background: #c0fff3;
+}
+.nav {
+    list-style: none;
+    text-decoration: none;
+    margin: 0;
+    padding: 0;
+}
+
+
+.nav-link {
+    text-decoration: none;
+    border-bottom: 1px solid gray;
+    display: block;
+    padding: 4px;
+}
+
+.nav-link:link, .nav-link:visited{
+    display: block;
+    background: #afc8ff;
+}
+
+.nav-link:hover {
+    background: #afc8dd;
+    font-weight: bold;
+    color: whitesmoke;
+}
+
+
 #content {
     width: 80%;
     background-color: azure;
@@ -50,3 +82,4 @@ body {
     clear: both;
     overflow: hidden;
 }
+

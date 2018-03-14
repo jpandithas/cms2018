@@ -18,6 +18,18 @@ function t_content($content="")
     }
 }
 
+function t_sidebar($sidebar="")
+{
+    if (isset($GLOBALS['sidebar']))
+    {
+        $GLOBALS['sidebar'] .= $sidebar;
+    }
+    else
+    {
+        $GLOBALS['sidebar'] = $sidebar;
+    }
+}
+
 function print_header()
 {
 
@@ -37,7 +49,12 @@ function print_content()
 
 function print_sidebar()
 {
-
+    if (isset($GLOBALS['sidebar']))
+    {
+        print($GLOBALS['sidebar']);
+        return True;
+    }
+    return False;
 }
 
 function print_footer()

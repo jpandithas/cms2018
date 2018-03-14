@@ -94,7 +94,7 @@ class DB
 
         if (empty($username) or empty($password)) return False;
         $usr = strip_tags($username);
-        $pass = strip_tags($password);
+        $pass = Security::CMS_Hash(strip_tags($password));
 
         $sql  = "SELECT `uid` from `users` WHERE `username`= ? AND `password` = ? ";
         $stmt = $dbo->prepare($sql);
@@ -124,6 +124,21 @@ class DB
         return False;
     }
 
+    public function GetSidebarItems()
+    {
+        $dbo = $this->dbo;
+
+        $sql = "SELECT action,type,mod_real_name FROM routes WHERE status=1";
+
+        $stmt = $dbo->prepare($sql);
+        $result  = $stmt->execute(array());
+
+        if ($result)
+        {
+            $items = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $items;
+        }
+    }
 }
 
 ?>

@@ -9,19 +9,33 @@ function add_page()
 
     t_content("<h2> Add Page</h2>");
 
-    if ($_POST['add_page']== "Add Page")
+    if (isset($_POST['add_page']) and $_POST['add_page']== "Add Page")
     {
         $db = new Add_Page_Queries();
-        $result = $db->AddPage($_POST['title'],$_POST['content'],$_POST['alias']);
 
+        if ($db->isDuplicateAlias($_POST['alias']))
+        {
+            t_content("Alias: <b><i>{$_POST['alias']}</i></b> exists!<br/>");
+            t_content(show_add_page_form($_POST['title'],$_POST['content'],$_POST['alias']));
+            return True;
+        }
+
+        $result = $db->AddPage($_POST['title'],$_POST['content'],$_POST['alias']);
         if ($result)
         {
             t_content("Page Added!</br>");
-            t_content("ID:".$result);
-        }
 
+            $url = new URL();
+            $url->Redirect("display/page/{$_POST['alias']}");
+        }
+        else
+        {
+            t_content("The form contains errors!<br/>");
+            t_content(show_add_page_form($_POST['title'],$_POST['content'],$_POST['alias']));
+            return True;
+        }
     }
-    t_content(show_add_page_form("title","text text text","alias"));
+    t_content(show_add_page_form("title","Content goes here","alias"));
 
    // xdebug_print_function_stack();
 }
@@ -42,6 +56,19 @@ function show_add_page_form($title,$content,$alias)
 
 class Add_Page_Queries extends DB
 {
+    public function isDuplicateAlias($alias)
+    {
+        if (empty($alias)) return False;
+
+        $dbo = $this->dbo;
+        $sql =  "SELECT alias FROM page where alias = ? LIMIT 1";
+        $stmt = $dbo->prepare($sql);
+        $params = array($alias);
+        $result = $stmt->execute($params);
+
+        return $stmt->fetch();
+    }
+
     public function AddPage($title, $content, $alias)
     {
         if (empty($title) or empty($content) or empty($alias)) return False;

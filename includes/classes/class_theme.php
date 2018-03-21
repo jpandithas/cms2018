@@ -28,7 +28,17 @@ class Theme
     public static function RenderMainNavMenu()
     {
         $db = new DB();
+        $url = new URL();
         $items = $db->GetSidebarItems();
+
+        if (Security::IsLoggedIn())
+        {
+            $userlevel  = $_SESSION['userlevel'];
+        }
+        else
+        {
+            $userlevel = 4;
+        }
 
         $html = "<ul id='main-nav' class='nav'>";
 
@@ -36,6 +46,7 @@ class Theme
         {
             if ((Security::IsLoggedIn()== True) and ($item['action']=='login')) continue;
             if ((Security::IsLoggedIn()== False) and ($item['action']=='logout')) continue;
+            if ($userlevel>$item['tier']) continue;
 
             $html .= "<li class='nav-item'>";
             $html.= "<a class='nav-link' href='".CMS_BASE_URI."?q=".$item['action'];

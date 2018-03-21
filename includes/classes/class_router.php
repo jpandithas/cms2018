@@ -10,6 +10,13 @@ class Router
     {
         $db  = new DB();
         $mod_name = $db->GetModuleFromDB($url);
+
+        if (Security::IsModAllowedToRun($url)== False)
+        {
+            t_content("<h3 class='error' id='level'>Insufficient User Level</h3>");
+            return False;
+        }
+
         $file_path = 'modules/'.$mod_name.'/'.$mod_name.".php";
         if (is_readable($file_path))
         {

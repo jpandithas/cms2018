@@ -24,4 +24,24 @@ class Security
 
         return md5(HASH_SALT.md5($data));
     }
+
+    public static function IsModAllowedToRun(URL $url)
+    {
+        $db = new DB();
+        $tier  = $db->GetModuleTierDB($url);
+
+        if (isset($_SESSION['userlevel']))
+        {
+            $userlevel  = $_SESSION['userlevel'];
+        }
+        else
+        {
+            $userlevel = 4;
+        }
+        if ($userlevel > $tier)
+        {
+            return False;
+        }
+        return True;
+    }
 }

@@ -73,6 +73,26 @@ class DB
         return False;
     }
 
+    public function GetModuleTierDB(URL $url)
+    {
+        $mod_name = $this->GetModuleFromDB($url);
+        return $this->GetModuleTierFromName($mod_name);
+    }
+
+    public function GetModuleTierFromName($mod_name)
+    {
+        $dbo  = $this->dbo;
+        $sql = "SELECT tier FROM routes WHERE mod_name = ? LIMIT 1";
+        $stmt = $dbo->prepare($sql);
+        $result = $stmt->execute(array($mod_name));
+        if ($result)
+        {
+            $tier = $stmt->fetch();
+            return $tier['tier'];
+        }
+        return False;
+    }
+
     public function GetActiveTheme()
     {
         $dbo = $this->dbo;
@@ -128,7 +148,7 @@ class DB
     {
         $dbo = $this->dbo;
 
-        $sql = "SELECT action,type,mod_real_name FROM routes WHERE status=1";
+        $sql = "SELECT action,type,mod_real_name,tier FROM routes WHERE status=1";
 
         $stmt = $dbo->prepare($sql);
         $result  = $stmt->execute(array());

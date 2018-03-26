@@ -68,6 +68,21 @@ tr:nth-child(odd)
 }
 
 
+.cms-btn {
+    margin: 2px;
+    text-decoration :none;
+    font-weight: bold;
+    padding: 3px;
+    border: 1px solid lightgray;
+    background: lightblue;
+    color: white;
+}
+
+.cms-btn:hover{
+    background: darkgrey;
+    text-shadow: 1px 1px 2px lightblue;
+    box-shadow: 1px 1px 2px lightblue;
+}
 #content {
     width: 80%;
     background-color: azure;

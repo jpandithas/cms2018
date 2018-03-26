@@ -24,17 +24,16 @@ function display_page()
             //t_content("This is an alias");
             $db = new DisplayQueries();
             $pagedata = $db->GetPageByAlias($alias);
-            ShowPage($pagedata);
         }
         else
         {
             //t_content("This is an ID");
             $db = new DisplayQueries();
             $pagedata = $db->GetPageByID($id);
-            ShowPage($pagedata);
+
         }
-
-
+       t_content(DisplayButtons($pagedata));
+        ShowPage($pagedata);
 
     }
     else
@@ -44,6 +43,15 @@ function display_page()
 
 }
 
+function DisplayButtons($pagedata)
+{
+
+    if (Security::IsLoggedIn()== False ) return False;
+
+    $html  = "<a class='cms-btn' href=".CMS_BASE_URI."?q=edit/page/".$pagedata['pageid']."> Edit Page </a>";
+    $html .= "<a class='cms-btn' href=".CMS_BASE_URI."?q=delete/page/".$pagedata['pageid']."> Delete Page </a>";
+    return $html;
+}
 
 function ShowPage($page_Array)
 {
@@ -69,7 +77,7 @@ class DisplayQueries extends DB
 
         $dbo = $this->dbo;
 
-        $sql= "SELECT title,content,timeadd,timeedit FROM page WHERE pageid = ? LIMIT 1";
+        $sql= "SELECT pageid,title,content,timeadd,timeedit FROM page WHERE pageid = ? LIMIT 1";
 
         $params = array($id);
 
@@ -92,7 +100,7 @@ class DisplayQueries extends DB
 
         $dbo = $this->dbo;
 
-        $sql= "SELECT title,content,timeadd,timeedit FROM page WHERE alias = ? LIMIT 1";
+        $sql= "SELECT pageid,title,content,timeadd,timeedit FROM page WHERE alias = ? LIMIT 1";
         $params = array($alias);
 
         $stmt = $dbo->prepare($sql);

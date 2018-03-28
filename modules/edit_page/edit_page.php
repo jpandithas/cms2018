@@ -12,6 +12,14 @@ function edit_page()
 
     $db = new EditQueries();
 
+    $pagedata = Utilities::GetPageFromURL();
+
+    if (!is_array($pagedata))
+    {
+        t_content("<h3> Page not Found! </h3>");
+        return False;
+    }
+
     if (isset($_POST['edit_page']) and ($_POST['edit_page'] == "Edit Page") )
     {
 
@@ -36,36 +44,7 @@ function edit_page()
         }
     }
 
-    $url = new URL();
-    $urlArray = $url->GetUrlComponentArray();
-
-    if (count($urlArray) == 3)
-    {
-        $id = (integer) $urlArray['id'];
-        $alias  = $urlArray['id'];
-        $id2str = (string) $id;
-
-        if (strlen($id2str) < strlen($alias))
-        {
-            //t_content("This is an alias");
-            $db = new EditQueries();
-            $pagedata = $db->GetPageByAlias($alias);
-
-            t_content(ShowEditPageForm($pagedata));
-        }
-        else
-        {
-            //t_content("This is an ID");
-            $db = new EditQueries();
-            $pagedata = $db->GetPageByID($id);
-            t_content(ShowEditPageForm($pagedata));
-        }
-
-    }
-    else
-    {
-        t_content("Page not Found!");
-    }
+    t_content(ShowEditPageForm($pagedata));
 }
 
 function ShowEditPageForm($pagedata)
@@ -81,9 +60,11 @@ function ShowEditPageForm($pagedata)
     $html .= "<tr><td>CONTENT</td><td><textarea  id='text_editor' required='required' name='content'>{$content}</textarea><td></tr>";
     $html .= "<tr><td>ALIAS</td><td><input type='text' name='alias' value='{$alias}' required='required'><td></tr>";
     $html .= "<input type='hidden' name='pageid' value={$pageid} >";
-    $html .= "<tr><td><input type='submit' name='edit_page' value='Edit Page'></td></tr>";
+    $html .= "<tr><td rowspan='2'><input type='submit' name='edit_page' value='Edit Page'></td>";
+    $html .= "<td rowspan='2'><a href=".CMS_BASE_URI."?q=display/page/{$pageid} class='cms-btn'>View Page</a></td></tr>";
     $html .= "<table>";
     $html .= "</form>";
+    $html .="<br/> ";
 
     return $html;
 }
@@ -103,50 +84,6 @@ class EditQueries extends DB
         return $stmt->fetch();
     }
 
-    public function GetPageByID($id)
-    {
-        if (empty($id)) return False;
-
-        $dbo = $this->dbo;
-
-        $sql= "SELECT pageid,title,content,alias FROM page WHERE pageid = ? LIMIT 1";
-
-        $params = array($id);
-
-        $stmt = $dbo->prepare($sql);
-        $result = $stmt->execute($params);
-
-        if ($result)
-        {
-            return $stmt->fetch(PDO::FETCH_ASSOC);
-        }
-        else
-        {
-            return False;
-        }
-    }
-
-    public function GetPageByAlias($alias)
-    {
-        if (empty($alias)) return False;
-
-        $dbo = $this->dbo;
-
-        $sql= "SELECT pageid,title,content,alias FROM page WHERE alias = ? LIMIT 1";
-        $params = array($alias);
-
-        $stmt = $dbo->prepare($sql);
-        $result = $stmt->execute($params);
-
-        if ($result)
-        {
-            return $stmt->fetch(PDO::FETCH_ASSOC);
-        }
-        else
-        {
-            return False;
-        }
-    }
 
     public function EditPage($title,$content,$alias,$pageid)
     {
@@ -160,7 +97,7 @@ class EditQueries extends DB
         $stmt = $dbo->prepare($sql);
 
         $params = Array($title,$content,$alias,$pageid);
-        var_dump($params);
+       // var_dump($params);
 
         $result = $stmt->execute($params);
 

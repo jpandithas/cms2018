@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Mar 26, 2018 at 05:58 PM
+-- Generation Time: Mar 28, 2018 at 05:47 PM
 -- Server version: 5.7.19
 -- PHP Version: 5.6.31
 
@@ -44,10 +44,10 @@ CREATE TABLE IF NOT EXISTS `page` (
 --
 
 INSERT INTO `page` (`pageid`, `title`, `content`, `alias`, `timeadd`, `timeedit`) VALUES
-(2, 'title', 'My first page content ', 'alias', '2018-03-19 16:03:41', '2018-03-19 16:03:41'),
-(6, 'title', 'This is the second page', 'alias1', '2018-03-19 16:38:11', '2018-03-19 16:38:11'),
-(7, 'title', 'This is the third page -- EDITED!', 'alias2', '2018-03-19 16:39:43', '2018-03-26 17:06:45'),
-(8, 'This is my Fourth Page!!!', 'Fourth Page content', 'fourth-page', '2018-03-19 18:56:07', '2018-03-19 18:56:07');
+(2, 'title1', 'My first page content ', 'alias', '2018-03-19 16:03:41', '2018-03-19 16:03:41'),
+(6, 'title2', 'This is the second page', 'alias1', '2018-03-19 16:38:11', '2018-03-19 16:38:11'),
+(7, 'title of page to be killed', 'This is the third page -- EDITED!', 'alias2', '2018-03-19 16:39:43', '2018-03-28 15:37:05'),
+(8, 'This is my Fourth Page!!!', 'Fourth Page content', 'fourth-page', '2018-03-19 18:56:07', '2018-03-28 17:34:53');
 
 -- --------------------------------------------------------
 
@@ -67,7 +67,7 @@ CREATE TABLE IF NOT EXISTS `routes` (
   `status` tinyint(1) NOT NULL,
   `tier` tinyint(4) NOT NULL,
   PRIMARY KEY (`routeid`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `routes`
@@ -79,7 +79,8 @@ INSERT INTO `routes` (`routeid`, `action`, `type`, `id`, `mod_name`, `mod_real_n
 (3, 'select', 'theme', 0, 'select_theme', 'Select a theme', 'This is the theme selection mod', 1, 1),
 (4, 'logout', NULL, 0, 'logout', 'Logout', 'This is the logout module. ', 1, 3),
 (5, 'display', 'page', 1, 'display_page', 'Display Page', 'This is the display page module', 1, 4),
-(6, 'edit', 'page', 1, 'edit_page', 'Edit Page', 'Edit Page Module', 1, 2);
+(6, 'edit', 'page', 1, 'edit_page', 'Edit Page', 'Edit Page Module', 1, 2),
+(7, 'delete', 'page', 1, 'delete_page', 'Delete Page', 'This is the delete page mod', 1, 2);
 
 -- --------------------------------------------------------
 

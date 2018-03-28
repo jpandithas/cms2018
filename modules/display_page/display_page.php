@@ -9,36 +9,16 @@
 function display_page()
 {
 
-    $url = new URL();
+    $pagedata = Utilities::GetPageFromURL();
 
-    $urlArray = $url->GetUrlComponentArray();
-
-    if (count($urlArray) == 3)
+    if (is_array($pagedata))
     {
-        $id = (integer) $urlArray['id'];
-        $alias  = $urlArray['id'];
-        $id2str = (string) $id;
-
-        if (strlen($id2str) < strlen($alias))
-        {
-            //t_content("This is an alias");
-            $db = new DisplayQueries();
-            $pagedata = $db->GetPageByAlias($alias);
-        }
-        else
-        {
-            //t_content("This is an ID");
-            $db = new DisplayQueries();
-            $pagedata = $db->GetPageByID($id);
-
-        }
-       t_content(DisplayButtons($pagedata));
+        t_content(DisplayButtons($pagedata));
         ShowPage($pagedata);
-
     }
     else
     {
-        t_content("Page not Found!");
+        t_content("<h3> Page Not Found</h3>");
     }
 
 }
@@ -49,7 +29,7 @@ function DisplayButtons($pagedata)
     if (Security::IsLoggedIn()== False ) return False;
 
     $html  = "<a class='cms-btn' href=".CMS_BASE_URI."?q=edit/page/".$pagedata['pageid']."> Edit Page </a>";
-    $html .= "<a class='cms-btn' href=".CMS_BASE_URI."?q=delete/page/".$pagedata['pageid']."> Delete Page </a>";
+    $html .= "<a class='cms-btn' id='delete-btn' href=".CMS_BASE_URI."?q=delete/page/".$pagedata['pageid']."> Delete Page </a>";
     return $html;
 }
 
@@ -57,7 +37,7 @@ function ShowPage($page_Array)
 {
     if (count($page_Array)==0 or !is_array($page_Array))
     {
-        t_content("<h3> Page not found or Page Error!</h3>");
+        t_content("<h3> Page Error!</h3>");
         return False;
     }
 
@@ -68,53 +48,5 @@ function ShowPage($page_Array)
     return True;
 }
 
-class DisplayQueries extends DB
-{
-
-    public function GetPageByID($id)
-    {
-        if (empty($id)) return False;
-
-        $dbo = $this->dbo;
-
-        $sql= "SELECT pageid,title,content,timeadd,timeedit FROM page WHERE pageid = ? LIMIT 1";
-
-        $params = array($id);
-
-        $stmt = $dbo->prepare($sql);
-        $result = $stmt->execute($params);
-
-        if ($result)
-        {
-            return $stmt->fetch(PDO::FETCH_ASSOC);
-        }
-        else
-        {
-            return False;
-        }
-    }
-
-    public function GetPageByAlias($alias)
-    {
-        if (empty($alias)) return False;
-
-        $dbo = $this->dbo;
-
-        $sql= "SELECT pageid,title,content,timeadd,timeedit FROM page WHERE alias = ? LIMIT 1";
-        $params = array($alias);
-
-        $stmt = $dbo->prepare($sql);
-        $result = $stmt->execute($params);
-
-        if ($result)
-        {
-            return $stmt->fetch(PDO::FETCH_ASSOC);
-        }
-        else
-        {
-            return False;
-        }
-    }
-}
 
 ?>

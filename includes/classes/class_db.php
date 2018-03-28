@@ -29,6 +29,51 @@ class DB
         return False;
     }
 
+    public function GetPageByID($id)
+    {
+        if (empty($id)) return False;
+
+        $dbo = $this->dbo;
+
+        $sql= "SELECT * FROM page WHERE pageid = ? LIMIT 1";
+
+        $params = array($id);
+
+        $stmt = $dbo->prepare($sql);
+        $result = $stmt->execute($params);
+
+        if ($result)
+        {
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        }
+        else
+        {
+            return False;
+        }
+    }
+
+    public function GetPageByAlias($alias)
+    {
+        if (empty($alias)) return False;
+
+        $dbo = $this->dbo;
+
+        $sql= "SELECT * FROM page WHERE alias = ? LIMIT 1";
+        $params = array($alias);
+
+        $stmt = $dbo->prepare($sql);
+        $result = $stmt->execute($params);
+
+        if ($result)
+        {
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        }
+        else
+        {
+            return False;
+        }
+    }
+
     public function GetModuleFromDB(URL $url)
     {
         $urlArray = $url->GetUrlComponentArray();
@@ -148,7 +193,7 @@ class DB
     {
         $dbo = $this->dbo;
 
-        $sql = "SELECT action,type,mod_real_name,tier FROM routes WHERE status=1";
+        $sql = "SELECT action,type,id,mod_real_name,tier FROM routes WHERE status=1";
 
         $stmt = $dbo->prepare($sql);
         $result  = $stmt->execute(array());
@@ -159,6 +204,7 @@ class DB
             return $items;
         }
     }
+
 }
 
 ?>

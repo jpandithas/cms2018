@@ -73,16 +73,46 @@ tr:nth-child(odd)
     text-decoration :none;
     font-weight: bold;
     padding: 3px;
-    border: 1px solid lightgray;
-    background: lightblue;
-    color: white;
+    border: 3px solid green;
+    background: lightgreen;
+    color: black;
+    border-radius: 2px;
 }
 
 .cms-btn:hover{
-    background: darkgrey;
-    text-shadow: 1px 1px 2px lightblue;
-    box-shadow: 1px 1px 2px lightblue;
+    background: green;
+    /*text-shadow: 1px 1px 2px lightblue;*/
+    box-shadow: 2px 2px 4px black;
+    color: white;
 }
+
+#delete-btn {
+    background: indianred;
+    border: 3px solid red;
+}
+
+#delete-btn:hover{
+    background: red;
+}
+
+.yes_btn{
+    color: white;
+    font-weight: bold;
+    font-size: large;
+    background: green;
+    padding: 4px;
+    margin: 2px;
+}
+
+.no_btn{
+    color: white;
+    font-weight: bold;
+    font-size: large;
+    background: red;
+    padding: 4px;
+    margin: 2px;
+}
+
 #content {
     width: 80%;
     background-color: azure;

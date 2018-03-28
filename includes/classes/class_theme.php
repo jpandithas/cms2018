@@ -47,6 +47,7 @@ class Theme
             if ((Security::IsLoggedIn()== True) and ($item['action']=='login')) continue;
             if ((Security::IsLoggedIn()== False) and ($item['action']=='logout')) continue;
             if ($userlevel>$item['tier']) continue;
+            if ($item['id'] == 1) continue;
 
             $html .= "<li class='nav-item'>";
             $html.= "<a class='nav-link' href='".CMS_BASE_URI."?q=".$item['action'];

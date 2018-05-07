@@ -5,7 +5,7 @@
  */
 function select_theme()
 {
-   var_dump($_POST);
+   //var_dump($_POST);
 
     $db = new ThemeSwitchDB();
 

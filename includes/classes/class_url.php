@@ -14,7 +14,6 @@ class URL
         $this->readURL();
     }
 
-
     protected function readURL()
     {
         if (!empty($_GET['q']))

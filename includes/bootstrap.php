@@ -16,9 +16,10 @@ function boot($debug=False)
 
     if (Security::IsLoggedIn())
     {
-        echo "User: ".$_SESSION['username']." is online";
+        t_sidebar("<h4>Online: ".$_SESSION['username']."</h4>");
     }
 
+    t_sidebar("<h3>Navigation</h3>");
     t_sidebar(Theme::RenderMainNavMenu());
 
     ob_start();
